@@ -53,7 +53,7 @@ runs:
         IFS=',' read -r -a fields <<< "$required_fields"
 
         for f in "${files[@]}"; do
-          frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
+          frontmatter="$(awk 'NR==1 && $0=="---" {in_frontmatter=1; next} in_frontmatter && $0=="---" {exit} in_frontmatter {print}' "$f")"
 
           if [ -z "$frontmatter" ]; then
             echo "Missing YAML frontmatter: $f"
