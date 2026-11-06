@@ -1,0 +1,77 @@
+name: Check markdown frontmatter
+description: Validates required YAML frontmatter keys in markdown files under a directory.
+
+inputs:
+  target:
+    description: Directory to scan for markdown files.
+    required: true
+  required_fields:
+    description: Comma-separated list of required frontmatter keys.
+    required: true
+  file_glob:
+    description: File name pattern passed to find -name.
+    required: false
+    default: "*.md"
+  fail_if_empty:
+    description: Whether to fail when no matching files are found.
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Validate frontmatter
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        target="${{ inputs.target }}"
+        required_fields="${{ inputs.required_fields }}"
+        file_glob="${{ inputs.file_glob }}"
+        fail_if_empty="${{ inputs.fail_if_empty }}"
+
+        if [ ! -d "$target" ]; then
+          if [ "$fail_if_empty" = "true" ]; then
+            echo "Directory does not exist: $target"
+            exit 1
+          fi
+          echo "Directory does not exist, skipping: $target"
+          exit 0
+        fi
+
+        mapfile -d '' files < <(find "$target" -type f -name "$file_glob" -print0 2>/dev/null || true)
+
+        if [ ${#files[@]} -eq 0 ]; then
+          if [ "$fail_if_empty" = "true" ]; then
+            echo "No files found in $target matching $file_glob"
+            exit 1
+          fi
+          echo "No files found in $target matching $file_glob. Skipping."
+          exit 0
+        fi
+
+        IFS=',' read -r -a fields <<< "$required_fields"
+
+        for f in "${files[@]}"; do
+          frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
+
+          if [ -z "$frontmatter" ]; then
+            echo "Missing YAML frontmatter: $f"
+            exit 1
+          fi
+
+          for field in "${fields[@]}"; do
+            field="$(echo "$field" | xargs)"
+            if [ -z "$field" ]; then
+              continue
+            fi
+
+            escaped_field="$(printf '%s' "$field" | sed -E 's/[][(){}.^$*+?|\\]/\\&/g')"
+            if ! printf '%s\n' "$frontmatter" | grep -Eq "^${escaped_field}:[[:space:]]*.+$"; then
+              echo "Missing frontmatter field '$field': $f"
+              exit 1
+            fi
+          done
+        done
+
+        echo "Frontmatter validation passed for ${#files[@]} file(s) in $target."

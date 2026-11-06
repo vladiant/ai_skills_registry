@@ -30,77 +30,19 @@ jobs:
           printf '%s\0' "${files[@]}" | xargs -0 npx --yes markdownlint-cli2
 
       - name: Check required frontmatter in instruction files
-        run: |
-          set -euo pipefail
-
-          mapfile -d '' files < <(find .github/instructions -type f -name '*.md' -print0 2>/dev/null || true)
-
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No instruction files found."
-            exit 0
-          fi
-
-          for f in "${files[@]}"; do
-            frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
-
-            if [ -z "$frontmatter" ]; then
-              echo "Missing YAML frontmatter: $f"
-              exit 1
-            fi
-
-            if ! printf '%s\n' "$frontmatter" | grep -Eq '^applyTo:[[:space:]]*.+$'; then
-              echo "Missing applyTo frontmatter field: $f"
-              exit 1
-            fi
-          done
+        uses: ./.github/actions/check-frontmatter
+        with:
+          target: .github/instructions
+          required_fields: applyTo
 
       - name: Check required frontmatter in agent files
-        run: |
-          set -euo pipefail
-
-          mapfile -d '' files < <(find .github/agents -type f -name '*.md' -print0 2>/dev/null || true)
-
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No agent files found."
-            exit 0
-          fi
-
-          for f in "${files[@]}"; do
-            frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
-
-            if [ -z "$frontmatter" ]; then
-              echo "Missing YAML frontmatter: $f"
-              exit 1
-            fi
-
-            if ! printf '%s\n' "$frontmatter" | grep -Eq '^name:[[:space:]]*.+$'; then
-              echo "Missing name frontmatter field: $f"
-              exit 1
-            fi
-          done
-
+        uses: ./.github/actions/check-frontmatter
+        with:
+          target: .github/agents
+          required_fields: name
 
       - name: Check required frontmatter in skill files
-        run: |
-          set -euo pipefail
-
-          mapfile -d '' files < <(find .github/skills -type f -name '*.md' -print0 2>/dev/null || true)
-
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No skill files found."
-            exit 0
-          fi
-
-          for f in "${files[@]}"; do
-            frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
-
-            if [ -z "$frontmatter" ]; then
-              echo "Missing YAML frontmatter: $f"
-              exit 1
-            fi
-
-            if ! printf '%s\n' "$frontmatter" | grep -Eq '^name:[[:space:]]*.+$'; then
-              echo "Missing name frontmatter field: $f"
-              exit 1
-            fi
-          done
+        uses: ./.github/actions/check-frontmatter
+        with:
+          target: .github/skills
+          required_fields: name

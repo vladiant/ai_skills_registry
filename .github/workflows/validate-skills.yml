@@ -14,34 +14,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate skills frontmatter
-        run: |
-          set -euo pipefail
-
-          mapfile -d '' files < <(find .github/skills -type f -name '*.md' -print0)
-
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No skill markdown files found. Skipping validation."
-            exit 0
-          fi
-
-          for f in "${files[@]}"; do
-            frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
-
-            if [ -z "$frontmatter" ]; then
-              echo "Missing YAML frontmatter in: $f"
-              exit 1
-            fi
-
-            if ! printf '%s\n' "$frontmatter" | grep -Eq '^name:[[:space:]]*.+$'; then
-              echo "Missing frontmatter field 'name' in: $f"
-              exit 1
-            fi
-
-            if ! printf '%s\n' "$frontmatter" | grep -Eq '^description:[[:space:]]*.+$'; then
-              echo "Missing frontmatter field 'description' in: $f"
-              exit 1
-            fi
-          done
+        uses: ./.github/actions/check-frontmatter
+        with:
+          target: .github/skills
+          required_fields: name,description
 
       - name: Secret scan
         uses: gitleaks/gitleaks-action@v2
