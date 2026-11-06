@@ -1,0 +1,45 @@
+name: Validate agent files
+
+on:
+  pull_request:
+    paths:
+      - '.github/instructions/**'
+      - '.github/agents/**'
+      - '.github/skills/**'
+      - 'prompts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint markdown formatting
+        run: npx --yes markdownlint-cli2 ".github/**/*.md" "prompts/**/*.md"
+
+      - name: Check required frontmatter in instruction files
+        run: |
+          for f in .github/instructions/*.md; do
+            if ! grep -q "^applyTo:" "$f"; then
+              echo "Missing applyTo frontmatter: $f"
+              exit 1
+            fi
+          done
+
+      - name: Check required frontmatter in agent files
+        run: |
+          for f in .github/agents/*.md; do
+            if ! grep -q "^name:" "$f"; then
+              echo "Missing name frontmatter: $f"
+              exit 1
+            fi
+          done
+
+      - name: Check required frontmatter in skill files
+        run: |
+          for f in .github/skills/*.md; do
+            if ! grep -q "^name:" "$f"; then
+              echo "Missing name frontmatter: $f"
+              exit 1
+            fi
+          done
