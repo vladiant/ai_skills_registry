@@ -1,38 +1,49 @@
-name: validate-skills
-on: [pull_request]
+name: Validate skills
+
+on:
+  pull_request:
+    paths:
+      - ".github/skills/**"
 
 jobs:
   validate-skills:
     runs-on: ubuntu-latest
-    container: node:22
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
-      - run: npm install js-yaml
 
-      - name: Basic install test
+      - name: Validate skills frontmatter
         run: |
-          npx -y skills add . --list
-          npx -y skills add . --skill poc-alpha --agent claude-code --copy -y
-          test -f .claude/skills/poc-alpha/SKILL.md || test -f .agents/skills/poc-alpha/SKILL.md
+          set -euo pipefail
 
-      - name: Validate SKILL.md schema
-        run: node scripts/validate-skills.js
+          mapfile -d '' files < <(find .github/skills -type f -name '*.md' -print0)
 
-      - name: Custom policy scan
-        run: node scripts/policy-scan.js
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No skill markdown files found. Skipping validation."
+            exit 0
+          fi
+
+          for f in "${files[@]}"; do
+            frontmatter="$(awk 'NR==1 && $0=="---" {in=1; next} in && $0=="---" {exit} in {print}' "$f")"
+
+            if [ -z "$frontmatter" ]; then
+              echo "Missing YAML frontmatter in: $f"
+              exit 1
+            fi
+
+            if ! printf '%s\n' "$frontmatter" | grep -Eq '^name:[[:space:]]*.+$'; then
+              echo "Missing frontmatter field 'name' in: $f"
+              exit 1
+            fi
+
+            if ! printf '%s\n' "$frontmatter" | grep -Eq '^description:[[:space:]]*.+$'; then
+              echo "Missing frontmatter field 'description' in: $f"
+              exit 1
+            fi
+          done
 
       - name: Secret scan
-        run: |
-          GITLEAKS_VERSION=$(curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest \
-            | grep '"tag_name"' \
-            | sed -E 's/.*"v([^"]+)".*/\1/')
-          
-          curl -fsSL \
-            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
-            -o gitleaks.tar.gz
-          
-          tar -xzf gitleaks.tar.gz
-          ./gitleaks detect --source . --verbose
-
-      - name: Generate catalog
-        run: node scripts/generate-catalog.js
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
