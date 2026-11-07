@@ -10,9 +10,12 @@ prefer editing existing patterns over introducing new ones.
 - Run relevant tests after modifying any logic file.
 - Prefer small, focused changes over large rewrites.
 - Flag breaking changes explicitly before applying them.
-- When adding, removing, or renaming a skill, update the `## Available
-  skills` section in the repository root `README.md` to match the current
-  registry.
+- When adding, removing, or renaming a skill or agent, update the
+  repository root `README.md` to keep these sections aligned with the current
+  registry:
+  - `## Available skills`
+  - `## Available agents`
+  - the `## Repository layout` tree
 
 ## Communication
 

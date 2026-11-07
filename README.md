@@ -39,6 +39,17 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 
 - `readme-creation` — generate or improve a repository `README.md` using
   the repository's actual structure and project metadata.
+- `create-adr` — document a significant architectural decision as an
+  Architecture Decision Record using the MADR format.
+- `architecture-review` — review an existing architecture across
+  reliability, scalability, security, observability, cost, and operability.
+- `design-new-service` — design a new service from scratch, gathering
+  requirements then producing diagrams, component breakdown, and an ADR.
+
+## Available agents
+
+- `solution-architect` — expert Solution Architect for designing scalable,
+  resilient, cost-effective systems and evaluating architectural trade-offs.
 
 ## Repository layout
 
@@ -46,7 +57,15 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 ai_skills_registry/
 ├── .github/
 │   ├── copilot-instructions.md
+│   ├── agents/
+│   │   └── solution-architect.md
 │   ├── skills/
+│   │   ├── architecture-review/
+│   │   │   └── SKILL.md
+│   │   ├── create-adr/
+│   │   │   └── SKILL.md
+│   │   ├── design-new-service/
+│   │   │   └── SKILL.md
 │   │   └── readme-creation/
 │   │       └── SKILL.md
 │   └── workflows/
