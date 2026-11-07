@@ -15,7 +15,9 @@ prefer editing existing patterns over introducing new ones.
   registry:
   - `## Available skills`
   - `## Available agents`
-  - the `## Repository layout` tree
+  - the `## Repository layout` tree, which should show only folders and a
+    brief comment describing each folder's purpose; do not include file names
+    in the layout tree
 
 ## Communication
 
