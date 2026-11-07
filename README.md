@@ -45,11 +45,19 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
   reliability, scalability, security, observability, cost, and operability.
 - `design-new-service` — design a new service from scratch, gathering
   requirements then producing diagrams, component breakdown, and an ADR.
+- `requirements-elicitation` — facilitate a structured stakeholder interview
+  to elicit explicit, implicit, and latent requirements as draft BR/FR/NFR.
+- `gap-analysis` — perform a structured AS-IS → TO-BE gap analysis with
+  classified, prioritized gaps and remediation actions.
+- `user-story-generator` — generate Agile user stories with Given/When/Then
+  acceptance criteria, MoSCoW priority, complexity, and dependencies.
 
 ## Available agents
 
 - `solution-architect` — expert Solution Architect for designing scalable,
   resilient, cost-effective systems and evaluating architectural trade-offs.
+- `functional-analyst` — experienced Functional Analyst that elicits,
+  analyzes, documents, and validates requirements across the lifecycle.
 
 ## Repository layout
 
@@ -58,6 +66,7 @@ ai_skills_registry/
 ├── .github/
 │   ├── copilot-instructions.md
 │   ├── agents/
+│   │   ├── functional-analyst.md
 │   │   └── solution-architect.md
 │   ├── skills/
 │   │   ├── architecture-review/
@@ -66,7 +75,13 @@ ai_skills_registry/
 │   │   │   └── SKILL.md
 │   │   ├── design-new-service/
 │   │   │   └── SKILL.md
-│   │   └── readme-creation/
+│   │   ├── gap-analysis/
+│   │   │   └── SKILL.md
+│   │   ├── readme-creation/
+│   │   │   └── SKILL.md
+│   │   ├── requirements-elicitation/
+│   │   │   └── SKILL.md
+│   │   └── user-story-generator/
 │   │       └── SKILL.md
 │   └── workflows/
 ├── prompts/
