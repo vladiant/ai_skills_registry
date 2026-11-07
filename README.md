@@ -63,30 +63,17 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 
 ```text
 ai_skills_registry/
-├── .github/
-│   ├── copilot-instructions.md
-│   ├── agents/
-│   │   ├── functional-analyst.md
-│   │   └── solution-architect.md
-│   ├── skills/
-│   │   ├── architecture-review/
-│   │   │   └── SKILL.md
-│   │   ├── create-adr/
-│   │   │   └── SKILL.md
-│   │   ├── design-new-service/
-│   │   │   └── SKILL.md
-│   │   ├── gap-analysis/
-│   │   │   └── SKILL.md
-│   │   ├── readme-creation/
-│   │   │   └── SKILL.md
-│   │   ├── requirements-elicitation/
-│   │   │   └── SKILL.md
-│   │   └── user-story-generator/
-│   │       └── SKILL.md
-│   └── workflows/
-├── prompts/
-├── README.md
-├── LICENSE
+├── .github/                          # repository metadata, automation, and config
+│   ├── agents/                      # agent definitions for the registry
+│   ├── instructions/                # repo-level behavior and coding guidance
+│   ├── skills/                      # reusable skill definitions
+│   ├── actions/                     # shared workflow actions
+│   ├── workflows/                   # CI validation workflows
+│   └── mcp/                         # MCP integration configuration
+├── .claude/                         # Claude project configuration
+├── hooks/                           # git hooks and helper scripts
+├── plugins/                         # plugin extensions and integrations
+└── prompts/                        # reusable prompt templates
 ```
 
 ## Maintenance
