@@ -7,6 +7,8 @@ You are a coding assistant for this repository. Be concise, accurate, and prefer
 - Run relevant tests after modifying any logic file
 - Prefer small, focused changes over large rewrites
 - Flag breaking changes explicitly before applying them
+- When adding, removing, or renaming a skill, update the `## Available skills`
+  section in the repository root `README.md` to match the current registry.
 
 ## Communication
 - Lead with the answer, then the reasoning
