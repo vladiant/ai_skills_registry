@@ -13,6 +13,11 @@ argument-hint: The requirement, feature request, or rough description to split
 Act as a Functional Analyst. Generate well-formed Agile User Stories from the
 requirement or feature description provided.
 
+## Input
+
+$ARGUMENTS — the requirement, feature request, or rough description to split.
+If this is empty or shows as a literal placeholder, use the user's message.
+
 ## Missing input
 
 If the persona, goal, or scope is unclear, ask up to 3 questions. If you

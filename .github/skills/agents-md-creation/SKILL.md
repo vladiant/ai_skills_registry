@@ -11,8 +11,14 @@ argument-hint: Optional scope focus (e.g. "backend service" or "full monorepo")
 
 # AGENTS.md Creation
 
-Create a concise, high-signal `AGENTS.md` that is specific to the target
-repository and optimized for daily agent use.
+You are an expert software architect and engineering enablement lead. Create a
+concise, high-signal `AGENTS.md` that is specific to the target repository and
+optimized for daily agent use.
+
+## Input
+
+$ARGUMENTS — optional scope focus. If this is empty or shows as a literal
+placeholder, use the user's message, or document the whole repository.
 
 ## Procedure
 
@@ -40,14 +46,23 @@ missing, write "Not yet documented" instead of guessing.
 
 1. **Commands** (first): list executable commands with full flags/options.
    Prefer file-scoped forms first. Mark project-wide commands as "use before
-   commits, not after every edit".
-2. **Tech stack**: list concrete technologies and versions from manifests.
+   commits, not after every edit". Take them from `package.json` scripts,
+   `Makefile` targets, `pyproject.toml` scripts, CI configs, Dockerfiles, and
+   shell scripts.
+2. **Tech stack**: list concrete technologies and versions from manifests
+   (language, framework, database, ORM, test runner, linter, formatter,
+   bundler where present). Be precise, for example "FastAPI >=0.115 with
+   Uvicorn".
 3. **Project structure**: describe architecture pattern, dependency rule, and
-   domain concepts (not full path trees).
+   domain concepts (not full path trees). Use a table or concise descriptions
+   per layer or area.
 4. **Code style**: include 1-2 **✅ Good** and 1-2 **❌ Bad** examples based on
-   real repository patterns; reference linter/formatter conventions.
-5. **Testing**: explain full and targeted test runs, coverage, fixtures, and
-   mocking conventions; clarify external-service requirements.
+   real repository patterns. Point to model files to emulate and legacy
+   patterns to avoid; state naming, line length, and formatting rules;
+   reference linter/formatter configuration.
+5. **Testing**: explain full and targeted test runs and coverage; list shared
+   fixtures and utilities; define what and how to mock, test naming, and async
+   patterns; state whether tests are offline or need external services.
 6. **Boundaries**: define three tiers:
    - ✅ Always do
    - ⚠️ Ask first
@@ -62,7 +77,8 @@ missing, write "Not yet documented" instead of guessing.
    focused diff, no debug artifacts; add changelog and SemVer review if
    item 7 applies).
 10. **Cross-tool compatibility** (optional): if `CLAUDE.md` or `.cursorrules`
-    exist, make them point to `./AGENTS.md`.
+    exist, point them to `AGENTS.md` with the line
+    `Strictly follow the rules in ./AGENTS.md`.
 
 ### 4. Apply formatting and quality constraints
 
@@ -73,6 +89,11 @@ missing, write "Not yet documented" instead of guessing.
 - End with a **Progressive Disclosure** section linking deeper references.
 - Keep the root `AGENTS.md` under about 150 lines.
 
+### 5. Verify before writing
+
+Confirm that every command and version you list appears in a manifest, script,
+or CI file, and remove any that does not.
+
 ## Output
 
 - Write the result to `AGENTS.md` at the repository root. If one already
@@ -82,3 +103,10 @@ missing, write "Not yet documented" instead of guessing.
   if the user asks for a preview.
 - The file itself contains no analysis, preambles, or placeholders unless they
   reflect true repository state.
+
+## References
+
+- [How to write a great AGENTS.md: lessons from over 2,500
+  repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/)
+- [A complete guide to
+  AGENTS.md](https://www.aihero.dev/a-complete-guide-to-agents-md)

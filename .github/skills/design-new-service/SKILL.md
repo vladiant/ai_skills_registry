@@ -13,6 +13,11 @@ argument-hint: The service or system to design
 
 Act as a Solution Architect designing a new service or system from scratch.
 
+## Input
+
+$ARGUMENTS — the service or system to design. If this is empty or shows as a
+literal placeholder, use the user's message.
+
 ## Missing input
 
 Check which of these the user has already answered, and ask only about the

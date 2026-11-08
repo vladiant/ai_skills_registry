@@ -114,9 +114,12 @@ def check_skills() -> set[str]:
             fail(skill_file, f"description is {len(description)} chars (max 1024)")
         if description and not TRIGGER_RE.search(description):
             fail(skill_file, "description needs a 'Use when ...' trigger phrase")
-        for line in skill_file.read_text(encoding="utf-8").splitlines():
+        body = skill_file.read_text(encoding="utf-8")
+        for line in body.splitlines():
             if line.strip() in FORBIDDEN_SKILL_HEADINGS:
                 fail(skill_file, f"remove '{line.strip()}'; put triggers in description")
+        if fields.get("argument-hint") and "$ARGUMENTS" not in body:
+            fail(skill_file, "has argument-hint but never uses $ARGUMENTS; add '## Input'")
     return names
 
 

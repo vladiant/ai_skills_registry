@@ -13,6 +13,11 @@ argument-hint: The current (AS-IS) and target (TO-BE) states to compare
 Act as a Functional Analyst performing a structured gap analysis using
 AS-IS → TO-BE state analysis.
 
+## Input
+
+$ARGUMENTS — the current (AS-IS) and target (TO-BE) states to compare. If this
+is empty or shows as a literal placeholder, use the user's message.
+
 ## Missing input
 
 If the AS-IS or TO-BE state is missing or too vague to compare, ask up to 5

@@ -15,6 +15,11 @@ Refactor an existing `AGENTS.md` to follow progressive-disclosure principles.
 Keep the root file minimal and move detailed guidance into separate markdown
 files grouped by topic.
 
+## Input
+
+$ARGUMENTS — optional path to the AGENTS.md file to refactor. If this is empty
+or shows as a literal placeholder, follow step 0 below.
+
 ## Goal
 
 Reduce the root instructions to only the essentials while preserving the useful,

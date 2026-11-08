@@ -13,6 +13,12 @@ argument-hint: Optional repo focus or target language/framework
 Explore this repository and create an `AGENTS.md` at the repo root.
 Keep it minimal — the ideal `AGENTS.md` is as small as possible.
 
+## Input
+
+$ARGUMENTS — optional repo focus or target language/framework. If this is empty
+or shows as a literal placeholder, use the user's message or cover the whole
+repository.
+
 ## Required content
 
 Include only:
@@ -32,6 +38,8 @@ Include only:
 - Keep root guidance compact and high-signal.
 - Use only evidence from the repository; do not invent commands or versions.
   Write "Not yet documented" for anything you cannot find.
+- Before writing, confirm every command and version appears in a manifest,
+  script, or CI file; remove any that does not.
 
 ## Output
 

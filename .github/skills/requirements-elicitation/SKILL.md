@@ -14,6 +14,11 @@ argument-hint: The feature, feature request, or process to be elicited
 Act as a senior Functional Analyst facilitating a requirements elicitation
 session using a structured stakeholder interview.
 
+## Input
+
+$ARGUMENTS — the feature, feature request, or process to be elicited. If this
+is empty or shows as a literal placeholder, use the user's message.
+
 ## Procedure
 
 This skill runs in two phases. Decide which one applies from the input.
