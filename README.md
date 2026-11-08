@@ -51,6 +51,16 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
   classified, prioritized gaps and remediation actions.
 - `user-story-generator` — generate Agile user stories with Given/When/Then
   acceptance criteria, MoSCoW priority, complexity, and dependencies.
+- `agents-md-creation` — create a concise, repository-specific `AGENTS.md`
+  using progressive disclosure and practical agent-governance rules.
+- `minimal-agents-md-creation` — create a very small `AGENTS.md` covering
+  only the essentials: project description, commands, stack, examples, and
+  boundaries.
+- `agent-definition-creator` — create specialized `.github/agents/*.md`
+  files for QA, docs, and lint work using repository-specific commands and
+  boundaries.
+- `agends-md-refactor` — refactor an existing `AGENTS.md` into a minimal root
+  file plus separate topic docs following progressive disclosure.
 
 ## Available agents
 
@@ -58,6 +68,13 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
   resilient, cost-effective systems and evaluating architectural trade-offs.
 - `functional-analyst` — experienced Functional Analyst that elicits,
   analyzes, documents, and validates requirements across the lifecycle.
+
+## Available prompts
+
+- `readme-creation` — generate a production-ready repository `README.md`
+  from real repository structure, metadata, and commands.
+- `agents-md-creation` — generate a focused, best-practice `AGENTS.md`
+  with progressive disclosure and repository-specific standards.
 
 ## Repository layout
 

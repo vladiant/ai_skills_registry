@@ -10,11 +10,12 @@ prefer editing existing patterns over introducing new ones.
 - Run relevant tests after modifying any logic file.
 - Prefer small, focused changes over large rewrites.
 - Flag breaking changes explicitly before applying them.
-- When adding, removing, or renaming a skill or agent, update the
+- When adding, removing, or renaming a skill, agent, or prompt, update the
   repository root `README.md` to keep these sections aligned with the current
   registry:
   - `## Available skills`
   - `## Available agents`
+  - `## Available prompts`
   - the `## Repository layout` tree, which should show only folders and a
     brief comment describing each folder's purpose; do not include file names
     in the layout tree
