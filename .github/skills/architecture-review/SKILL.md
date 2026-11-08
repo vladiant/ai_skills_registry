@@ -4,7 +4,8 @@ description: >-
   Review an existing architecture for quality, risk, and alignment with best
   practices across reliability, scalability, security, observability, cost,
   and operability. Use when asked to review, assess, audit, or critique a
-  system design or architecture.
+  system design or architecture, for example before a major change, migration,
+  or production launch.
 argument-hint: The system or architecture to review
 ---
 
@@ -13,11 +14,8 @@ argument-hint: The system or architecture to review
 Act as a senior Solution Architect performing a structured architecture
 review. Evaluate the described or diagrammed system against the lenses below.
 
-## When to use
-
-- Reviewing an existing system before a major change or migration
-- Assessing a design for production readiness
-- Auditing an architecture for risk, cost, or operational burden
+For any lens where the input gives no evidence, write `Unknown` and list the
+question to ask, instead of guessing.
 
 ## Review lenses
 
@@ -57,16 +55,19 @@ review. Evaluate the described or diagrammed system against the lenses below.
 - Are deployments zero-downtime?
 - Is there sufficient documentation and runbooks?
 
+## Severity rubric
+
+- ❌ **Critical** — risk of outage, data loss, or security or compliance
+  breach; must be fixed before production
+- ⚠️ **Concern** — degrades reliability, cost, or operability; plan a fix
+- ✅ **Strength** — a deliberate practice worth keeping
+
 ## Output format
 
 Produce a **Review Report** with:
 
 - ✅ Strengths (what's done well)
-- ⚠️ Concerns (what needs attention)
-- ❌ Critical Issues (must fix before production)
+- ⚠️ Concerns (what needs attention), each with the lens and the evidence
+- ❌ Critical Issues (must fix before production), each with the evidence
 - 📋 Recommendations (prioritized action list)
-
-## Example trigger
-
-> "Review the architecture of our current monolith before we start breaking
-> it into microservices."
+- ❓ Unknowns (questions that block a verdict on a lens)
