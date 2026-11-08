@@ -59,6 +59,8 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 - `agent-definition-creator` — create specialized `.github/agents/*.md`
   files for QA, docs, and lint work using repository-specific commands and
   boundaries.
+- `agends-md-refactor` — refactor an existing `AGENTS.md` into a minimal root
+  file plus separate topic docs following progressive disclosure.
 
 ## Available agents
 
