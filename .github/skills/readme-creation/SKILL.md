@@ -13,13 +13,6 @@ You are a senior technical writer and software architect. Your task is to
 author a production-quality `README.md` for this repository by inspecting the
 actual codebase, configuration files, and project metadata before writing.
 
-## When to use
-
-- Creating or rewriting a project README from scratch
-- Updating an outdated or incomplete README
-- Producing a credible project overview for developers or evaluators
-- Documenting a new repository for the first time
-
 ## Procedure
 
 ### 1. Inspect the repository
@@ -34,30 +27,28 @@ Before writing, read:
 - Any existing `README.md`, `CHANGELOG`, or `docs/` content
 - The license file or repository metadata for the license name
 
-### 2. Generate sections in this exact order
+### 2. Generate sections in this order
 
 1. **Badges** — only badges provable from the repo (language, license, CI
    status, version). Omit if none are reliable.
-2. **One-line value proposition** — a single sentence stating the project's
-   purpose and who it helps.
+2. **Overview** — a one-line value proposition stating the project's purpose
+   and who it helps, followed by a short purpose paragraph (what it is, what
+   problem it solves, who should use it).
 3. **Quick start** — exact, working install/build/run commands from the repo's
    manifests and scripts.
 4. **Architecture** — compact but accurate overview of the main components and
    how they interact.
 5. **Key decisions** — 3–6 important design choices with rationale tied to the
    implementation.
-6. **Benchmarks** — quantitative data only if the repo already contains
-   benchmark results; otherwise state that no formal benchmark suite is
-   documented.
+6. **Benchmarks** — include only if the repo already contains benchmark
+   results; otherwise omit this section entirely.
 7. **License** — the project's actual license sourced from the license file or
    metadata.
 
 ### 3. Apply the content template
 
-Use this four-part writing pattern across the body:
+Use this writing pattern across the body:
 
-- **Purpose paragraph**: open Overview with what the project is, what problem
-  it solves, and who should use it.
 - **Build/run commands**: populate Quick start with copy-pasteable shell
   commands grouped by action (install → build → run/test) in fenced code
   blocks.
@@ -72,13 +63,21 @@ Use this four-part writing pattern across the body:
 - Be factual. Never invent features, commands, benchmarks, or architecture not
   present in the repo.
 - If a fact is missing, write "Not yet documented" or omit rather than guessing.
+- Before finishing, confirm that every command in Quick start appears in a
+  manifest, script, or CI file.
 - Use Markdown headings, fenced code blocks for all commands, and short
   descriptive bullets.
 - Prefer clarity and accuracy over marketing language.
-- Return only the final `README.md` content — no commentary, preambles, or
-  meta-notes.
+- The README itself contains no commentary, preambles, or meta-notes.
 - Do not use placeholders (`TODO`, `TBD`, `[your-project-name]`) unless they
   reflect real repository state.
+
+## Output
+
+Write `README.md` at the repository root, or in the subdirectory given as the
+argument. If one already exists, update it in place and keep accurate
+existing content. Then reply with the path and a one-line summary. Print the
+content only if the user asks for a preview.
 
 ## Output template
 
@@ -89,7 +88,7 @@ Use this four-part writing pattern across the body:
 
 ## Overview
 
-<!-- Purpose paragraph -->
+<!-- One-line value proposition, then the purpose paragraph -->
 One-line value proposition followed by a concise description.
 
 ## Quick start
@@ -121,9 +120,8 @@ Brief description of the main components and how they interact.
 
 ## Benchmarks
 
-If benchmark evidence exists, include it here with context and commands to
-reproduce.
-Otherwise: No formal benchmark suite is documented in this repository yet.
+<!-- Include only if the repo contains benchmark results; else omit -->
+Results with context and commands to reproduce.
 
 ## License
 

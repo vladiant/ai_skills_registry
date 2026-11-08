@@ -21,14 +21,15 @@ the best practices from:
 
 ## Core principles
 
-- Keep the root `AGENTS.md` small and focused. Every token loads on every
-  request. Frontier models can follow roughly 150-200 instructions
-  consistently; do not waste this budget.
+- Keep the root `AGENTS.md` small and focused: under about 150 lines. Every
+  token loads on every request, so do not waste the instruction budget.
 - Use progressive disclosure: put detailed rules in separate files and
   reference them.
 - Describe capabilities and domain concepts, not exact file paths (paths go
   stale quickly).
 - Never add vague or obvious instructions such as "write clean code".
+- Use only evidence from the repository. Write "Not yet documented" for
+  anything you cannot find; do not invent commands or versions.
 
 ## Required AGENTS.md sections
 
@@ -78,22 +79,17 @@ the best practices from:
    - **⚠️ Ask first**: actions requiring human approval.
    - **🚫 Never do**: hard prohibitions.
 
-7. **Changelog**
-   - Require `CHANGELOG.md` with [Keep a Changelog
-     1.1.0](https://keepachangelog.com/en/1.1.0/) and [Semantic
-     Versioning](https://semver.org/spec/v2.0.0.html).
-   - Keep notable changes under `## [Unreleased]` with categories:
-     `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
-   - Write entries for humans: what changed and why it matters.
-   - At release time, move entries to `## [x.y.z] - YYYY-MM-DD`.
-   - Use ISO 8601 dates (`YYYY-MM-DD`), latest version first.
-   - Keep comparison links at the bottom.
-   - Never paste raw git log output into `CHANGELOG.md`.
-   - Apply version bump rules from diff review:
-     - **MAJOR**: breaking API, removed endpoints, incompatible migrations.
-     - **MINOR**: backward-compatible features or additions.
-     - **PATCH**: fixes, refactors, docs, dependency/style updates.
-   - Update manifest version and move `[Unreleased]` entries at release.
+7. **Changelog** (only if the repository has a `CHANGELOG.md` or the user
+   asks for one)
+   - Point to the file and state its format (for example [Keep a Changelog
+     1.1.0](https://keepachangelog.com/en/1.1.0/) with [Semantic
+     Versioning](https://semver.org/spec/v2.0.0.html)). Do not restate the
+     specifications.
+   - Notable changes go under `## [Unreleased]`; at release they move to
+     `## [x.y.z] - YYYY-MM-DD`. Never paste raw git log output.
+   - Version bumps: **MAJOR** for breaking API or incompatible migrations,
+     **MINOR** for backward-compatible features, **PATCH** for fixes,
+     refactors, docs, and dependency or style updates.
 
 8. **When stuck**
    - Add a short escape hatch: ask a clarifying question, propose a plan, or
@@ -102,9 +98,8 @@ the best practices from:
 9. **PR checklist**
    - Define "ready": lint/typecheck/tests green, focused diff, concise summary
      of what changed and why, no debug artifacts.
-   - Require `CHANGELOG.md` updates under `[Unreleased]`.
-   - Require SemVer bump validation and corresponding manifest/changelog
-     updates before merge.
+   - If item 7 applies, also require a `CHANGELOG.md` update under
+     `[Unreleased]` and SemVer bump validation.
 
 10. **Cross-tool compatibility** (optional)
     - If tool-specific files exist (`CLAUDE.md`, `.cursorrules`), point them to
@@ -123,8 +118,7 @@ the best practices from:
 - Add a **Progressive Disclosure** section at the end that references detailed
   docs/configs.
 - Add **When Stuck** and **PR Checklist** sections.
-- If changelog is used, include a **Changelog** section with Keep a Changelog
-  maintenance rules.
-- Keep the file below roughly 150 instructions; move details to referenced
-  files.
+- If a changelog is used, include a short **Changelog** section as described
+  above.
+- Keep the file under about 150 lines; move details to referenced files.
 - Write `AGENTS.md` at the repository root.

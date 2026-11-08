@@ -3,8 +3,9 @@ name: agents-md-creation
 description: >-
   Create an AGENTS.md file for a repository using best practices from GitHub
   Copilot guidance and progressive-disclosure principles. Use when asked to
-  create, rewrite, or improve AGENTS.md for agent behavior and contribution
-  rules.
+  create, write, or improve AGENTS.md, or to standardize agent guidance and
+  contribution rules. For a very small file use minimal-agents-md-creation; to
+  restructure an existing bloated AGENTS.md use agends-md-refactor.
 argument-hint: Optional scope focus (e.g. "backend service" or "full monorepo")
 ---
 
@@ -12,13 +13,6 @@ argument-hint: Optional scope focus (e.g. "backend service" or "full monorepo")
 
 Create a concise, high-signal `AGENTS.md` that is specific to the target
 repository and optimized for daily agent use.
-
-## When to use
-
-- Creating `AGENTS.md` from scratch
-- Rewriting a bloated or generic `AGENTS.md`
-- Standardizing agent guidance across teams and tools
-- Improving agent reliability with clearer boundaries and command references
 
 ## Procedure
 
@@ -31,6 +25,9 @@ Before writing, inspect:
 - Testing setup, fixtures, and utilities
 - Coding style and linter/formatter configuration
 - Existing contribution workflow, versioning, and changelog practices
+
+Do not ask the user for facts the repository already contains. If evidence is
+missing, write "Not yet documented" instead of guessing.
 
 ### 2. Keep root AGENTS.md small and focused
 
@@ -55,13 +52,15 @@ Before writing, inspect:
    - ✅ Always do
    - ⚠️ Ask first
    - 🚫 Never do
-7. **Changelog**: require `CHANGELOG.md` with Keep a Changelog 1.1.0 and
-   SemVer. Keep entries in `## [Unreleased]` under standard categories and
-   move them to `## [x.y.z] - YYYY-MM-DD` at release.
+7. **Changelog** (only if the repository has a `CHANGELOG.md` or the user asks
+   for one): point to it and state its format, that entries go under
+   `## [Unreleased]`, and the MAJOR/MINOR/PATCH bump rule. Do not restate the
+   Keep a Changelog or SemVer specifications.
 8. **When stuck**: ask clarifying questions, propose a plan, or open a draft
    PR with notes instead of speculative rewrites.
 9. **PR checklist**: define ready criteria (lint/typecheck/tests green,
-   focused diff, no debug artifacts, changelog and SemVer review done).
+   focused diff, no debug artifacts; add changelog and SemVer review if
+   item 7 applies).
 10. **Cross-tool compatibility** (optional): if `CLAUDE.md` or `.cursorrules`
     exist, make them point to `./AGENTS.md`.
 
@@ -72,11 +71,14 @@ Before writing, inspect:
 - Add config/environment guidance if env vars drive behavior.
 - Add git workflow guidance if the repository defines one.
 - End with a **Progressive Disclosure** section linking deeper references.
-- Keep total instructions in root `AGENTS.md` under roughly 150.
+- Keep the root `AGENTS.md` under about 150 lines.
 
-## Output rules
+## Output
 
-- Produce only the final `AGENTS.md` content.
-- Do not include analysis, preambles, or placeholders unless they reflect
-  true repository state.
-- If evidence is missing, prefer "Not yet documented" over guessing.
+- Write the result to `AGENTS.md` at the repository root. If one already
+  exists, do not overwrite it silently: for "improve" requests edit it in
+  place and summarize the changes; for restructuring use `agends-md-refactor`.
+- Then reply with the path and a one-line summary. Print the full content only
+  if the user asks for a preview.
+- The file itself contains no analysis, preambles, or placeholders unless they
+  reflect true repository state.

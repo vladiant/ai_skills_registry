@@ -2,7 +2,9 @@
 name: minimal-agents-md-creation
 description: >-
   Explore a repository and create a minimal AGENTS.md at the repo root with the
-  essential project description, commands, stack, examples, and boundaries.
+  essential project description, commands, stack, examples, and boundaries. Use
+  only when the user asks for a minimal, tiny, or short AGENTS.md. For a full
+  AGENTS.md with testing, changelog, and PR sections use agents-md-creation.
 argument-hint: Optional repo focus or target language/framework
 ---
 
@@ -29,4 +31,11 @@ Include only:
 - Point to separate files for detailed conventions.
 - Keep root guidance compact and high-signal.
 - Use only evidence from the repository; do not invent commands or versions.
-- Return only the final `AGENTS.md` content.
+  Write "Not yet documented" for anything you cannot find.
+
+## Output
+
+Write the result to `AGENTS.md` at the repository root. If one already exists,
+do not overwrite it silently; show what would change and ask first. Then reply
+with the path and a one-line summary. Print the content only if the user asks
+for a preview.

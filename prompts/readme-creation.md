@@ -17,26 +17,24 @@ Generate sections in this exact order:
 
 1. **Badges** — only badges provable from the repo (language, license, CI
    status, version). Omit if none are reliable.
-2. **One-line value proposition** — a single sentence stating the project's
-   purpose and who it helps or what problem it solves.
+2. **Overview** — a one-line value proposition stating the project's purpose
+   and who it helps or what problem it solves, followed by a short purpose
+   paragraph.
 3. **Quick start** — exact, working install/build/run commands derived from
    the repo's manifests and scripts.
 4. **Architecture** — compact but accurate overview of the main components,
    modules, folders, or services and how they interact.
 5. **Key decisions** — 3–6 important design choices with concise rationale
    tied to the implementation or its constraints.
-6. **Benchmarks** — quantitative data only if the repo already contains
-   benchmark results or metrics; otherwise state that no formal benchmark
-   suite is documented.
+6. **Benchmarks** — include only if the repo already contains benchmark
+   results or metrics; otherwise omit this section entirely.
 7. **License** — the project's actual license name sourced from the license
    file or repository metadata.
 
 ## Content template
 
-Apply this four-part writing pattern across the body of the README:
+Apply this writing pattern across the body of the README:
 
-- **Purpose paragraph**: open the Overview section with a clear description of
-  what the project is, what problem it solves, and who should use it.
 - **Build/run commands**: populate Quick start with exact, copy-pasteable
   shell commands grouped by action (install → build → run/test) inside fenced
   code blocks.
@@ -56,6 +54,8 @@ Apply this four-part writing pattern across the body of the README:
   that are not present in the repo.
 - If a fact is missing, write "Not yet documented" or omit the item rather
   than guessing.
+- Before finishing, confirm that every command in Quick start appears in a
+  manifest, script, or CI file.
 - Use Markdown headings, fenced code blocks for all commands, and short
   descriptive bullets.
 - Prefer clarity and accuracy over marketing language.
@@ -79,8 +79,7 @@ Apply this four-part writing pattern across the body of the README:
 
 ## Overview
 
-<!-- Purpose paragraph: what the project is, who it helps, -->
-<!-- and what problem it solves. -->
+<!-- One-line value proposition, then the purpose paragraph -->
 One-line value proposition followed by a concise description.
 
 ## Quick start
@@ -104,7 +103,7 @@ Brief description of the main components and how they interact.
 
 ## Key decisions
 
-<!-- "Why this design" note: each bullet explains the choice -->
+<!-- "Why this design": each bullet explains the choice -->
 <!-- and its rationale. -->
 - **Decision 1**: explanation — why this approach over alternatives.
 - **Decision 2**: explanation — why this approach over alternatives.
@@ -112,9 +111,8 @@ Brief description of the main components and how they interact.
 
 ## Benchmarks
 
-If benchmark evidence exists, include it here with context and commands to
-reproduce.
-Otherwise: No formal benchmark suite is documented in this repository yet.
+<!-- Include only if the repo contains benchmark results; else omit -->
+Results with context and commands to reproduce.
 
 ## License
 

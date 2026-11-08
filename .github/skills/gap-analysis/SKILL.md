@@ -46,7 +46,7 @@ Produce a Markdown table:
 
 | # | Area | AS-IS | TO-BE | Gap | Type | Priority | Remediation |
 |---|------|-------|-------|-----|------|----------|-------------|
-| 1 | ... | ... | ... | ... | ... | ... | ... |
+| 1 | ...  | ...   | ...   | ... | ...  | ...      | ...         |
 
 Followed by:
 

@@ -3,7 +3,9 @@ name: agent-definition-creator
 description: >-
   Create specialized agent definition files under .github/agents/ for testing,
   documentation, and code-quality work using repository-specific commands,
-  conventions, and boundaries.
+  conventions, and boundaries. Use when asked to create QA/test, docs, or lint
+  agents for a repository, or to generate focused .github/agents/*.md files
+  that match project reality.
 argument-hint: Optional target repo or domain (e.g. "backend service")
 ---
 
@@ -11,13 +13,6 @@ argument-hint: Optional target repo or domain (e.g. "backend service")
 
 Create three repository-specific agent definition files under `.github/agents/`.
 Use the actual project structure, tooling, and conventions in this repository.
-
-## When to use
-
-- Creating QA/test agent guidance for a project
-- Creating docs authoring guidance for a repository
-- Creating a lint/style-fix specialist agent
-- Generating focused `.github/agents/*.md` files that match project reality
 
 ## Required output files
 
@@ -38,6 +33,10 @@ Create these files:
    - Include linter config, formatting rules, and auto-fix commands
    - Boundary: fix style only, never change logic
 
+If the repository has no tests, docs, or linter, skip that agent and say why
+instead of inventing tooling. Adjust the `tests/` and `docs/` boundaries to
+the folders that actually exist.
+
 ## Procedure
 
 ### 1. Inspect repo evidence
@@ -54,7 +53,8 @@ Before writing any agent file, read:
 
 Each generated agent file should include:
 
-- YAML frontmatter with `name` and `description`
+- YAML frontmatter with `name` and `description` (the description says what
+  the agent does and when to use it)
 - A clear persona section
 - Project knowledge or repository-specific context
 - Executable commands relevant to that agent's role
@@ -76,9 +76,10 @@ Each generated agent file should include:
 - Do not add broad instructions like "write clean code".
 - Focus on practical boundaries, commands, and project context.
 
-## Output rules
+## Output
 
-- Create the files directly under `.github/agents/`.
-- Return only the final agent file contents when requested.
-- Use real patterns from this codebase, not generic defaults.
+- Write the files under `.github/agents/`. If a file already exists, edit it
+  instead of overwriting it.
+- Then reply with the files created and one line on each. Print file contents
+  only if the user asks for a preview.
 - Keep each file small, actionable, and specific.
