@@ -51,6 +51,8 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
   classified, prioritized gaps and remediation actions.
 - `user-story-generator` — generate Agile user stories with Given/When/Then
   acceptance criteria, MoSCoW priority, complexity, and dependencies.
+- `agents-md-creation` — create a concise, repository-specific `AGENTS.md`
+  using progressive disclosure and practical agent-governance rules.
 
 ## Available agents
 
