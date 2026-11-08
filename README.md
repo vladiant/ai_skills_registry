@@ -59,6 +59,13 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 - `functional-analyst` — experienced Functional Analyst that elicits,
   analyzes, documents, and validates requirements across the lifecycle.
 
+## Available prompts
+
+- `readme-creation` — generate a production-ready repository `README.md`
+  from real repository structure, metadata, and commands.
+- `agents-md-creation` — generate a focused, best-practice `AGENTS.md`
+  with progressive disclosure and repository-specific standards.
+
 ## Repository layout
 
 ```text
