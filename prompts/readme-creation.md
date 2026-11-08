@@ -1,8 +1,7 @@
 ---
 name: readme-creation
 description: >-
-  Generate a repository README.md using a consistent architecture documentation
-  skeleton and a strong technical writing template.
+  Generate a README.md for this repository.
 ---
 
 # README Creation Prompt
@@ -11,66 +10,74 @@ You are a senior technical writer and software architect. Your task is to
 author a production-quality `README.md` for this repository by inspecting the
 actual codebase, configuration files, and project metadata before writing.
 
-## README skeleton
+## Procedure
 
-Generate sections in this exact order:
+### 1. Inspect the repository
+
+Before writing, read:
+
+- Source folders and main entry points
+- Package manifests (`package.json`, `pyproject.toml`, `go.mod`,
+  `Cargo.toml`, etc.)
+- Config and Docker files
+- Existing tests and examples
+- Any existing `README.md`, `CHANGELOG`, or `docs/` content
+- The license file or repository metadata for the license name
+
+### 2. Generate sections in this order
 
 1. **Badges** — only badges provable from the repo (language, license, CI
    status, version). Omit if none are reliable.
 2. **Overview** — a one-line value proposition stating the project's purpose
-   and who it helps or what problem it solves, followed by a short purpose
-   paragraph.
-3. **Quick start** — exact, working install/build/run commands derived from
-   the repo's manifests and scripts.
-4. **Architecture** — compact but accurate overview of the main components,
-   modules, folders, or services and how they interact.
-5. **Key decisions** — 3–6 important design choices with concise rationale
-   tied to the implementation or its constraints.
+   and who it helps, followed by a short purpose paragraph (what it is, what
+   problem it solves, who should use it).
+3. **Quick start** — exact, working install/build/run commands from the repo's
+   manifests and scripts.
+4. **Architecture** — compact but accurate overview of the main components and
+   how they interact.
+5. **Key decisions** — 3–6 important design choices with rationale tied to the
+   implementation.
 6. **Benchmarks** — include only if the repo already contains benchmark
-   results or metrics; otherwise omit this section entirely.
-7. **License** — the project's actual license name sourced from the license
-   file or repository metadata.
+   results; otherwise omit this section entirely.
+7. **License** — the project's actual license sourced from the license file or
+   metadata.
 
-## Content template
+### 3. Apply the content template
 
-Apply this writing pattern across the body of the README:
+Use this writing pattern across the body:
 
-- **Build/run commands**: populate Quick start with exact, copy-pasteable
-  shell commands grouped by action (install → build → run/test) inside fenced
-  code blocks.
-- **What's demonstrated**: within the Architecture section, identify the
-  concrete capabilities, techniques, or patterns the project showcases — these
-  should follow directly from the structural description.
-- **"Why this design" note**: for each item in Key decisions, state the design
-  rationale — why this approach rather than a visible alternative — grounded in
-  the actual implementation choices visible in the code.
+- **Build/run commands**: populate Quick start with copy-pasteable shell
+  commands grouped by action (install → build → run/test) in fenced code
+  blocks.
+- **What's demonstrated**: within Architecture, identify the concrete
+  capabilities, techniques, or patterns the project showcases.
+- **"Why this design" note**: for each Key decision, state the rationale —
+  why this approach rather than a visible alternative — grounded in actual
+  implementation choices.
 
-## Requirements
+### 4. Apply quality rules
 
-- Inspect the repository before writing: read source folders, package
-  manifests, config files, tests, examples, Docker files, and any existing
-  docs.
-- Be factual. Never invent features, commands, benchmarks, or architecture
-  that are not present in the repo.
-- If a fact is missing, write "Not yet documented" or omit the item rather
-  than guessing.
+- Be factual. Never invent features, commands, benchmarks, or architecture not
+  present in the repo.
+- If a fact is missing, write "Not yet documented" or omit rather than guessing.
 - Before finishing, confirm that every command in Quick start appears in a
   manifest, script, or CI file.
 - Use Markdown headings, fenced code blocks for all commands, and short
   descriptive bullets.
 - Prefer clarity and accuracy over marketing language.
-- Keep the README polished, complete, and ready to commit.
+- The README itself contains no commentary, preambles, or meta-notes.
+- Do not use placeholders (`TODO`, `TBD`, `[your-project-name]`) unless they
+  reflect real repository state.
 
 ## Output rules
 
 - Return only the final `README.md` content.
-- Do not include commentary, preambles, analysis, or meta-notes outside the
-  README body.
-- Do not mention that you inspected files or are following instructions.
-- Do not use placeholders (`TODO`, `TBD`, `[your-project-name]`) unless they
-  represent actual repository state.
+- Do not include commentary, preambles, analysis, or meta-notes outside
+  the file body.
+- Do not mention that you inspected files or are following
+  instructions.
 
-## README template
+## Output template
 
 ````md
 # Project Name
@@ -98,13 +105,13 @@ One-line value proposition followed by a concise description.
 ## Architecture
 
 <!-- What's demonstrated: structural overview + concrete capabilities -->
-<!-- or patterns showcased. -->
+<!-- or patterns showcased -->
 Brief description of the main components and how they interact.
 
 ## Key decisions
 
-<!-- "Why this design": each bullet explains the choice -->
-<!-- and its rationale. -->
+<!-- "Why this design": each bullet states the choice and its rationale -->
+<!-- over alternatives -->
 - **Decision 1**: explanation — why this approach over alternatives.
 - **Decision 2**: explanation — why this approach over alternatives.
 - **Decision 3**: explanation — why this approach over alternatives.

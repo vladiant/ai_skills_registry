@@ -26,7 +26,9 @@ accurate, and prefer editing existing patterns over introducing new ones.
   - the `## Repository layout` tree, which should show only folders that exist
     and a brief comment describing each folder's purpose; do not include file
     names in the layout tree
-- When a prompt mirrors a skill, change the skill first, then sync the prompt.
+- Files in `prompts/` are generated from the skill of the same name. Never
+  edit them by hand: change the skill, then run
+  `python3 .github/scripts/sync_prompts.py`.
 
 ## Communication
 
@@ -44,6 +46,8 @@ Skills (`.github/skills/<name>/SKILL.md`):
   characters. If another skill overlaps, say when NOT to use this one.
 - Do not add `When to use` or `Example trigger` sections to the body; they load
   only after the skill has triggered.
+- Skills with an `argument-hint` use it in an `## Input` section through
+  `$ARGUMENTS`, with a fallback to the user's message.
 - Interactive skills include a `## Missing input` section (see existing skills
   for the standard wording) so they never stall in non-interactive runs.
 - State the output contract: which files to write, or that the reply is
@@ -67,6 +71,7 @@ Before committing changes to Markdown under `.github/instructions`,
 CI:
 
 - Registry checks: `python3 .github/scripts/validate_registry.py`
+- Prompt sync: `python3 .github/scripts/sync_prompts.py --check`
 - Lint Markdown: `npx --yes markdownlint-cli2 "<changed files>"`
 - Common rules to satisfy: lines ≤ 80 chars (MD013), blank lines around
   lists (MD032), first line is a top-level `#` heading (MD041), and end with
