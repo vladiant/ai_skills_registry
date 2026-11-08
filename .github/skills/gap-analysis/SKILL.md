@@ -13,11 +13,12 @@ argument-hint: The current (AS-IS) and target (TO-BE) states to compare
 Act as a Functional Analyst performing a structured gap analysis using
 AS-IS → TO-BE state analysis.
 
-## When to use
+## Missing input
 
-- Comparing current behaviour against a desired future state
-- Planning a migration, redesign, or capability upgrade
-- Identifying and prioritizing missing or changed capabilities
+If the AS-IS or TO-BE state is missing or too vague to compare, ask up to 5
+questions. If you cannot ask (non-interactive run) or the user says to
+proceed, describe what you assume as `[ASSUMED]` and continue. Never invent
+facts about the current state.
 
 ## Procedure
 
@@ -28,27 +29,27 @@ Given the current state and target state provided:
 3. Identify each **gap** (missing capability, changed behaviour, removed
    feature)
 4. Classify each gap by **Type** (Process / Data / System / People) and
-   **Priority** (High / Med / Low)
+   **Priority** using the rubric below
 5. Recommend remediation actions for each gap
 6. Flag **risks** if gaps are not addressed
 
+## Priority rubric
+
+- **High** — blocks the TO-BE goal, or carries compliance, security, or
+  data-loss risk
+- **Med** — degrades the outcome but a workaround exists
+- **Low** — cosmetic or nice-to-have; safe to defer
+
 ## Output format
 
-Produce a gap table:
+Produce a Markdown table:
 
-```text
-# | Area | AS-IS | TO-BE | Gap | Type | Priority | Remediation
---|------|-------|-------|-----|------|----------|------------
-1 | ...  | ...   | ...   | ... | ...  | ...      | ...
-```
+| # | Area | AS-IS | TO-BE | Gap | Type | Priority | Remediation |
+|---|------|-------|-------|-----|------|----------|-------------|
+| 1 | ... | ... | ... | ... | ... | ... | ... |
 
 Followed by:
 
 - **Summary** of critical gaps
 - **Risk register** for unaddressed gaps
 - **Recommended next steps**
-
-## Example trigger
-
-> "Run a gap analysis between our manual invoice approval process and a fully
-> automated TO-BE workflow."

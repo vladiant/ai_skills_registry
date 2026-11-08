@@ -2,9 +2,10 @@
 name: design-new-service
 description: >-
   Design a new service or system from scratch as a Solution Architect. Use
-  when starting a greenfield service and you need to gather requirements, then
-  produce a C4 context diagram, component breakdown, technology
-  recommendations, an initial ADR, and a risk register.
+  when starting a greenfield service, turning a business capability into an
+  architecture proposal, or producing first design artifacts: a context
+  diagram, component breakdown, technology recommendations, an initial ADR,
+  and a risk register.
 argument-hint: The service or system to design
 ---
 
@@ -12,36 +13,38 @@ argument-hint: The service or system to design
 
 Act as a Solution Architect designing a new service or system from scratch.
 
-## When to use
+## Missing input
 
-- Starting a new greenfield service or system
-- Turning a business capability into a concrete architecture proposal
-- Producing the first design artifacts for a new initiative
+Check which of these the user has already answered, and ask only about the
+rest (at most 5 questions):
+
+1. The **primary business capability** this service is responsible for
+2. The expected **load** (requests/sec, data volume, concurrency)
+3. The **SLA/SLO requirements** (uptime, latency targets)
+4. The **existing systems** it must integrate with
+5. Any **compliance requirements** (GDPR, HIPAA, PCI-DSS, SOC2)
+6. The **team size and cloud preference**
+
+If you cannot ask (non-interactive run) or the user says to proceed, list
+every unanswered item as an `[ASSUMED]` value and continue. Never invent SLAs
+or compliance obligations without marking them.
 
 ## Procedure
 
-### 1. Ask clarifying questions first
+Produce the design as a single response with these parts:
 
-Before proposing anything, ask the following:
+1. **Assumptions & open questions** — every `[ASSUMED]` item
+2. **Context diagram** — a Mermaid `flowchart` showing the system boundary,
+   users, and external systems
+3. **Component breakdown** — each component with its responsibility and the
+   data it owns
+4. **Technology recommendations** — with rationale tied to the stated
+   requirements, not trends
+5. **Initial ADR** for the top 1–2 decisions, using the `create-adr` skill
+   template
+6. **Risk register** — risk, likelihood, impact, mitigation
 
-1. What is the **primary business capability** this service is responsible
-   for?
-2. What is the expected **load** (requests/sec, data volume, concurrency)?
-3. What are the **SLA/SLO requirements** (uptime, latency targets)?
-4. What **existing systems** does this need to integrate with?
-5. Are there **compliance requirements** (GDPR, HIPAA, PCI-DSS, SOC2)?
-6. What is the **team size and cloud preference**?
+## Output
 
-### 2. Produce the design
-
-Once the questions are answered, produce:
-
-- A **C4 Context Diagram** (text-based) showing system boundaries
-- A **Component Breakdown** with responsibilities
-- **Technology recommendations** with rationale
-- An initial **ADR** (Architecture Decision Record) for the top 1–2 decisions
-- A **Risk Register** with mitigations
-
-## Example trigger
-
-> "Design a new payment processing service for our e-commerce platform."
+Reply inline. Write the ADR as a file only if the user asks for files; in that
+case follow the `create-adr` skill for location and numbering.

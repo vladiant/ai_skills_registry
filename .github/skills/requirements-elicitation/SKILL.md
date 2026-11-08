@@ -3,8 +3,9 @@ name: requirements-elicitation
 description: >-
   Facilitate a structured stakeholder interview to elicit explicit, implicit,
   and latent requirements. Use when gathering requirements for a feature or
-  process, running an elicitation session, or drafting initial BR/FR/NFR
-  requirements from a business need.
+  process, running an elicitation session, turning a raw feature request into
+  draft requirements, or drafting initial BR/FR/NFR requirements from a
+  business need.
 argument-hint: The feature, feature request, or process to be elicited
 ---
 
@@ -13,23 +14,28 @@ argument-hint: The feature, feature request, or process to be elicited
 Act as a senior Functional Analyst facilitating a requirements elicitation
 session using a structured stakeholder interview.
 
-## When to use
-
-- Turning a raw feature request or business need into draft requirements
-- Running a structured elicitation before design or estimation begins
-- Uncovering implicit and latent requirements behind a stated ask
-
 ## Procedure
 
-Given the feature or topic provided, conduct a structured elicitation by:
+This skill runs in two phases. Decide which one applies from the input.
 
-1. Asking 5–7 targeted clarifying questions to uncover explicit, implicit, and
-   latent requirements
-2. Identifying stakeholders who need to be consulted
-3. Highlighting potential risks, constraints, or dependencies to probe
-4. Summarising findings as draft requirements (BR / FR / NFR) once input is
-   provided
-5. Flagging any `[AMBIGUOUS]`, `[MISSING]`, or `[CONFLICTING]` items
+### Phase 1: no stakeholder answers yet
+
+1. Ask 5–7 targeted questions that uncover explicit, implicit, and latent
+   requirements
+2. Identify the stakeholders who need to be consulted
+3. Highlight risks, constraints, or dependencies to probe
+4. Draft **provisional** requirements from the request alone, marking each row
+   `[ASSUMED]`
+
+### Phase 2: answers provided
+
+Update the requirements table from the answers: remove `[ASSUMED]` where an
+answer confirms the row, and add or change rows as needed. Flag any
+`[AMBIGUOUS]`, `[MISSING]`, or `[CONFLICTING]` items.
+
+If you cannot ask questions (non-interactive run), do Phase 1 in a single
+response and say that Phase 2 needs the answers. Never invent stakeholder
+answers or decisions.
 
 ## Output format
 
@@ -49,7 +55,3 @@ Produce the following:
 
 - **Risk / constraint flags**
 - **Recommended next steps**
-
-## Example trigger
-
-> "Run an elicitation session for a new self-service password reset feature."
