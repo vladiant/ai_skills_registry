@@ -80,22 +80,20 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 
 ```text
 ai_skills_registry/
-├── .github/                          # repository metadata, automation, and config
-│   ├── agents/                      # agent definitions for the registry
-│   ├── instructions/                # repo-level behavior and coding guidance
-│   ├── skills/                      # reusable skill definitions
-│   ├── actions/                     # shared workflow actions
-│   ├── workflows/                   # CI validation workflows
-│   └── mcp/                         # MCP integration configuration
-├── .claude/                         # Claude project configuration
-├── hooks/                           # git hooks and helper scripts
-├── plugins/                         # plugin extensions and integrations
-└── prompts/                        # reusable prompt templates
+├── .github/               # repository metadata, automation, and config
+│   ├── agents/            # agent definitions for the registry
+│   ├── skills/            # reusable skill definitions
+│   ├── scripts/           # registry validation scripts
+│   └── workflows/         # CI validation and secret-scan workflows
+└── prompts/               # reusable prompt templates
 ```
 
 ## Maintenance
 
 ```bash
+# Validate the registry locally (the same checks run in CI)
+python3 .github/scripts/validate_registry.py
+
 # Refresh installed skills
 npx skills update
 
