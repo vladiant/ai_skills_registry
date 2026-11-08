@@ -53,6 +53,9 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
   acceptance criteria, MoSCoW priority, complexity, and dependencies.
 - `agents-md-creation` — create a concise, repository-specific `AGENTS.md`
   using progressive disclosure and practical agent-governance rules.
+- `minimal-agents-md-creation` — create a very small `AGENTS.md` covering
+  only the essentials: project description, commands, stack, examples, and
+  boundaries.
 
 ## Available agents
 
