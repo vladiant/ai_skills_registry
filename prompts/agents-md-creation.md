@@ -13,6 +13,24 @@ optimized for daily agent use.
 
 ## Procedure
 
+### 0. Choose the mode
+
+Default to the full file. Use **minimal mode** when the user asks for a
+minimal, tiny, or short `AGENTS.md`; the ideal minimal file is as small as
+possible. It contains only:
+
+- A one-sentence project description (anchors every decision)
+- The package manager or build tool, if non-standard
+- **Commands** with full flags
+- **Tech stack** with versions
+- **Code style**: one ✅ good and one ❌ bad example from this project
+- **Boundaries**
+
+In minimal mode, skip every other section, include no file tree, and point to
+separate files for detailed conventions. If an `AGENTS.md` already exists,
+show what would change and do not write; if you cannot ask, leave the file
+unchanged and reply with the proposed content.
+
 ### 1. Inspect repository evidence
 
 Before writing, inspect:

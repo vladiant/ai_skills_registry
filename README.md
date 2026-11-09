@@ -94,10 +94,8 @@ up-to-date version.
 - `user-story-generator` — generate Agile user stories with Given/When/Then
   acceptance criteria, MoSCoW priority, complexity, and dependencies.
 - `agents-md-creation` — create a concise, repository-specific `AGENTS.md`
-  using progressive disclosure and practical agent-governance rules.
-- `minimal-agents-md-creation` — create a very small `AGENTS.md` covering
-  only the essentials: project description, commands, stack, examples, and
-  boundaries.
+  using progressive disclosure and practical agent-governance rules, with a
+  minimal mode for a very small file.
 - `agent-definition-creator` — create specialized `.github/agents/*.md`
   files for QA, docs, and lint work using repository-specific commands and
   boundaries.

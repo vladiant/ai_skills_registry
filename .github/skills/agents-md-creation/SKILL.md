@@ -3,8 +3,8 @@ name: agents-md-creation
 description: >-
   Create an AGENTS.md file for a repository using best practices from GitHub
   Copilot guidance and progressive-disclosure principles. Use when asked to
-  create, write, or improve AGENTS.md, or to standardize agent guidance and
-  contribution rules. For a very small file use minimal-agents-md-creation; to
+  create, write, or improve AGENTS.md, to standardize agent guidance and
+  contribution rules, or to write a minimal, tiny, or short AGENTS.md. To
   restructure an existing bloated AGENTS.md use agents-md-refactor.
 argument-hint: Optional scope focus (e.g. "backend service" or "full monorepo")
 ---
@@ -21,6 +21,24 @@ $ARGUMENTS — optional scope focus. If this is empty or shows as a literal
 placeholder, use the user's message, or document the whole repository.
 
 ## Procedure
+
+### 0. Choose the mode
+
+Default to the full file. Use **minimal mode** when the user asks for a
+minimal, tiny, or short `AGENTS.md`; the ideal minimal file is as small as
+possible. It contains only:
+
+- A one-sentence project description (anchors every decision)
+- The package manager or build tool, if non-standard
+- **Commands** with full flags
+- **Tech stack** with versions
+- **Code style**: one ✅ good and one ❌ bad example from this project
+- **Boundaries**
+
+In minimal mode, skip every other section, include no file tree, and point to
+separate files for detailed conventions. If an `AGENTS.md` already exists,
+show what would change and do not write; if you cannot ask, leave the file
+unchanged and reply with the proposed content.
 
 ### 1. Inspect repository evidence
 
