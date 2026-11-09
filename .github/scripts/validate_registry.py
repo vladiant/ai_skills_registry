@@ -140,7 +140,12 @@ def check_instructions() -> None:
     if not directory.is_dir():
         return
     for path in sorted(directory.rglob("*.md")):
-        load(path, ("applyTo",))
+        fields = load(path, ("applyTo",))
+        if fields is None:
+            continue
+        for pattern in filter(None, (p.strip() for p in fields.get("applyTo", "").split(","))):
+            if not any(ROOT.glob(pattern)):
+                fail(path, f"applyTo '{pattern}' matches no files")
 
 
 def readme_section(readme: str, title: str) -> str | None:

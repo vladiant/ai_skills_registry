@@ -85,6 +85,7 @@ hand; see [Maintenance](#maintenance).
 ai_skills_registry/
 ├── .github/               # repository metadata, automation, and config
 │   ├── agents/            # agent definitions for the registry
+│   ├── instructions/      # authoring rules scoped by file path
 │   ├── skills/            # reusable skill definitions
 │   ├── scripts/           # validation and prompt-generation scripts
 │   └── workflows/         # CI validation and secret-scan workflows
