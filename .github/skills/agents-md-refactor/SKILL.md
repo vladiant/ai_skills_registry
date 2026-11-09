@@ -1,5 +1,5 @@
 ---
-name: agends-md-refactor
+name: agents-md-refactor
 description: >-
   Refactor an AGENTS.md into a minimal root file with progressive disclosure,
   contradiction checks, and supporting docs grouped by topic. Use when an

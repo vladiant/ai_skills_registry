@@ -5,7 +5,7 @@ description: >-
   Copilot guidance and progressive-disclosure principles. Use when asked to
   create, write, or improve AGENTS.md, or to standardize agent guidance and
   contribution rules. For a very small file use minimal-agents-md-creation; to
-  restructure an existing bloated AGENTS.md use agends-md-refactor.
+  restructure an existing bloated AGENTS.md use agents-md-refactor.
 argument-hint: Optional scope focus (e.g. "backend service" or "full monorepo")
 ---
 
@@ -98,7 +98,7 @@ or CI file, and remove any that does not.
 
 - Write the result to `AGENTS.md` at the repository root. If one already
   exists, do not overwrite it silently: for "improve" requests edit it in
-  place and summarize the changes; for restructuring use `agends-md-refactor`.
+  place and summarize the changes; for restructuring use `agents-md-refactor`.
 - Then reply with the path and a one-line summary. Print the full content only
   if the user asks for a preview.
 - The file itself contains no analysis, preambles, or placeholders unless they
