@@ -13,6 +13,11 @@ You are a senior technical writer and software architect. Your task is to
 author a production-quality `README.md` for this repository by inspecting the
 actual codebase, configuration files, and project metadata before writing.
 
+## Input
+
+$ARGUMENTS — optional path to a subdirectory or package to document. If this is
+empty or shows as a literal placeholder, document the repository root.
+
 ## Procedure
 
 ### 1. Inspect the repository

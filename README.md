@@ -71,6 +71,9 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 
 ## Available prompts
 
+Prompts are generated from the skill of the same name. Do not edit them by
+hand; see [Maintenance](#maintenance).
+
 - `readme-creation` — generate a production-ready repository `README.md`
   from real repository structure, metadata, and commands.
 - `agents-md-creation` — generate a focused, best-practice `AGENTS.md`
@@ -83,7 +86,7 @@ ai_skills_registry/
 ├── .github/               # repository metadata, automation, and config
 │   ├── agents/            # agent definitions for the registry
 │   ├── skills/            # reusable skill definitions
-│   ├── scripts/           # registry validation scripts
+│   ├── scripts/           # validation and prompt-generation scripts
 │   └── workflows/         # CI validation and secret-scan workflows
 └── prompts/               # reusable prompt templates
 ```
@@ -93,6 +96,9 @@ ai_skills_registry/
 ```bash
 # Validate the registry locally (the same checks run in CI)
 python3 .github/scripts/validate_registry.py
+
+# Regenerate prompts after changing a skill (CI runs this with --check)
+python3 .github/scripts/sync_prompts.py
 
 # Refresh installed skills
 npx skills update

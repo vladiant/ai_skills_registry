@@ -14,6 +14,11 @@ argument-hint: Optional target repo or domain (e.g. "backend service")
 Create three repository-specific agent definition files under `.github/agents/`.
 Use the actual project structure, tooling, and conventions in this repository.
 
+## Input
+
+$ARGUMENTS — optional target repo or domain. If this is empty or shows as a
+literal placeholder, target this repository.
+
 ## Required output files
 
 Create these files:
@@ -75,6 +80,11 @@ Each generated agent file should include:
 - Keep each agent file scoped to one responsibility.
 - Do not add broad instructions like "write clean code".
 - Focus on practical boundaries, commands, and project context.
+
+### 5. Verify before writing
+
+Confirm that every command in each file appears in a manifest, script, or CI
+file, and that every folder named in a boundary exists.
 
 ## Output
 
