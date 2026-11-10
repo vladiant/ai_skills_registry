@@ -11,6 +11,7 @@ on:
       - ".github/copilot-instructions.md"
       - "prompts/**"
       - "README.md"
+      - "AGENTS.md"
   push:
     branches:
       - main
@@ -39,4 +40,4 @@ jobs:
       - name: Lint markdown
         run: >-
           npx --yes markdownlint-cli2@0.23.2
-          ".github/**/*.md" "prompts/**/*.md" "README.md"
+          ".github/**/*.md" "prompts/**/*.md" "README.md" "AGENTS.md"

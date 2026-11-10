@@ -1,10 +1,13 @@
 # AI Skills Registry
 
-This repository is a GitHub-hosted skill registry for AI coding agents.
-It stores reusable skill definitions in a Git-native format so they can be
-installed into local agent environments with the `skills` CLI.
+This repository is a GitHub-hosted registry for AI coding agents. It stores
+reusable skills, agent definitions, and prompts in a Git-native format.
+Skills install with the `skills` CLI; agents and prompts are plain Markdown
+files you copy into place (see [Installation](#installation)).
 
 ## Installation
+
+### Skills
 
 Use the `skills` CLI to install skills from this repository:
 
@@ -32,8 +35,47 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 
 - the source of truth lives in Git;
 - the installer computes a checksum of the installed skill files;
-- the installation is reproducible and can be validated against a lock file;
+- installs are recorded in `skills-lock.json`, so they are reproducible and
+  can be validated against it;
 - updates can be pulled with `npx skills update`.
+
+### Agents
+
+The `skills` CLI installs skills only. Agents are single Markdown files with
+`name` and `description` frontmatter, so copy them into the folder your tool
+reads. Replace `solution-architect` with the agent you want.
+
+```bash
+RAW=https://raw.githubusercontent.com/vladiant/ai_skills_registry/main
+
+# GitHub Copilot custom agent, for this repository
+mkdir -p .github/agents
+curl -fsSL "$RAW/.github/agents/solution-architect.md" \
+  -o .github/agents/solution-architect.agent.md
+
+# Claude Code subagent, for this project (use ~/.claude/agents for all)
+mkdir -p .claude/agents
+curl -fsSL "$RAW/.github/agents/solution-architect.md" \
+  -o .claude/agents/solution-architect.md
+```
+
+For Copilot, an organization can share agents by putting them in the root
+`agents/` folder of its `.github` repository.
+
+Each agent calls skills from this registry, so install those too:
+
+| Agent                | Skills it relies on                    |
+|----------------------|----------------------------------------|
+| `solution-architect` | `create-adr`                           |
+| `functional-analyst` | `gap-analysis`                         |
+
+### Prompts
+
+Prompts are for assistants that cannot load skills. They are plain Markdown
+with no tool-specific format: paste the text below the frontmatter into a
+chat, or save it wherever your tool keeps reusable prompts. They are
+generated from the skill of the same name, so the skill is always the
+up-to-date version.
 
 ## Available skills
 
@@ -52,14 +94,12 @@ This repo follows the standard GitHub/GitLab + `npx skills` pattern:
 - `user-story-generator` — generate Agile user stories with Given/When/Then
   acceptance criteria, MoSCoW priority, complexity, and dependencies.
 - `agents-md-creation` — create a concise, repository-specific `AGENTS.md`
-  using progressive disclosure and practical agent-governance rules.
-- `minimal-agents-md-creation` — create a very small `AGENTS.md` covering
-  only the essentials: project description, commands, stack, examples, and
-  boundaries.
+  using progressive disclosure and practical agent-governance rules, with a
+  minimal mode for a very small file.
 - `agent-definition-creator` — create specialized `.github/agents/*.md`
   files for QA, docs, and lint work using repository-specific commands and
   boundaries.
-- `agends-md-refactor` — refactor an existing `AGENTS.md` into a minimal root
+- `agents-md-refactor` — refactor an existing `AGENTS.md` into a minimal root
   file plus separate topic docs following progressive disclosure.
 
 ## Available agents
@@ -85,6 +125,7 @@ hand; see [Maintenance](#maintenance).
 ai_skills_registry/
 ├── .github/               # repository metadata, automation, and config
 │   ├── agents/            # agent definitions for the registry
+│   ├── instructions/      # authoring rules scoped by file path
 │   ├── skills/            # reusable skill definitions
 │   ├── scripts/           # validation and prompt-generation scripts
 │   └── workflows/         # CI validation and secret-scan workflows
